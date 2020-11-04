@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一、Git标签的作用 使用场景:  在一个项目中，我们可能需要阶段性地发布一个版本，比如 V1.0、V1.0.2、V3.2 Beta 之类的 在一个长期大型项目中，可能会有数千个提交版本，我们可能需要对重要的节点性提交打个记号 在一些项目相关的书籍中，我们会看到 “执行 xxx 命令签出这个版本以查看对应的代码”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git学习五-tag和releases">
+<meta property="og:url" content="http://example.com/2020/11/04/git%E5%AD%A6%E4%B9%A0%E4%BA%94-tag%E5%92%8Creleases/index.html">
+<meta property="og:site_name" content="coder伍-个人博客">
+<meta property="og:description" content="一、Git标签的作用 使用场景:  在一个项目中，我们可能需要阶段性地发布一个版本，比如 V1.0、V1.0.2、V3.2 Beta 之类的 在一个长期大型项目中，可能会有数千个提交版本，我们可能需要对重要的节点性提交打个记号 在一些项目相关的书籍中，我们会看到 “执行 xxx 命令签出这个版本以查看对应的代码”">
+<meta property="og:locale" content="zh_HK">
+<meta property="article:published_time" content="2020-11-04T09:03:45.000Z">
+<meta property="article:modified_time" content="2020-11-04T09:07:19.382Z">
+<meta property="article:author" content="伍裕丰">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/11/04/git%E5%AD%A6%E4%B9%A0%E4%BA%94-tag%E5%92%8Creleases/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-HK'
+  };
+</script>
+
+  <title>git学习五-tag和releases | coder伍-个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder伍-个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">coder伍-个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-HK">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/04/git%E5%AD%A6%E4%B9%A0%E4%BA%94-tag%E5%92%8Creleases/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="伍裕丰">
+      <meta itemprop="description" content="伍裕丰的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder伍-个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git学习五-tag和releases
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-04 17:03:45 / 修改时间：17:07:19" itemprop="dateCreated datePublished" datetime="2020-11-04T17:03:45+08:00">2020-11-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、Git标签的作用"><a href="#一、Git标签的作用" class="headerlink" title="一、Git标签的作用"></a>一、Git标签的作用</h3><blockquote>
+<p>使用场景:</p>
+<ol>
+<li>在一个项目中，我们可能需要阶段性地发布一个版本，比如 <code>V1.0</code>、<code>V1.0.2</code>、<code>V3.2 Beta</code> 之类的</li>
+<li>在一个长期大型项目中，可能会有数千个提交版本，我们可能需要对重要的节点性提交打个记号</li>
+<li>在一些项目相关的书籍中，我们会看到 “执行 xxx 命令签出这个版本以查看对应的代码”</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+
+<h4 id="1-1-创建标签"><a href="#1-1-创建标签" class="headerlink" title="1.1 创建标签"></a>1.1 创建标签</h4><p>与  在仓库被 Fock 时 issue 不会跟随相似，Tags 通常在本地使用git命令创建后推送到GitHub后，Tags 只存在与项目仓库内，Fock 或提 PR 都不会带上Tags。</p>
+<p>在多人协作项目中，通常由组长对主仓库设置 Tags </p>
+<p>操作如下：</p>
+<ol>
+<li>克隆仓库、配置信息、查看提交版本历史</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git clone httos:&#x2F;&#x2F;github.com&#x2F;Acmen5&#x2F;work.git</span><br><span class="line">$ git log --oneline | nl </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建标签</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;注意： 我们创建标签是给具体的某次提交创建标签，与分支无关</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;指令格式为：</span><br><span class="line">&#x2F;&#x2F;$ git tag [标签名] -m [备注信息] [提交版本号]</span><br><span class="line">&#x2F;&#x2F;虽然-m [备注信息] 可以省略，但建议保留，便于使用者阅读</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;执行代码：</span><br><span class="line">$ git tag v1.0 -m &#39;发布项目正式版本 1.0&#39;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-查看标签"><a href="#1-2-查看标签" class="headerlink" title="1.2 查看标签"></a>1.2 查看标签</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1.执行 git tag 命令显示仓库中的全部标签列表</span><br><span class="line">&#x2F;&#x2F; 2.执行 git show [标签名] 查看标签详细信息</span><br><span class="line"></span><br><span class="line">$ git tag</span><br><span class="line">$ git show v1.0 | cat</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-删除本地标签"><a href="#1-3-删除本地标签" class="headerlink" title="1.3 删除本地标签"></a>1.3 删除本地标签</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 每当创建一个本地标签之后，在仓库的主目录的.git&#x2F;refs&#x2F;tags目录下就会生成一个标签文件</span><br><span class="line"></span><br><span class="line">$ tree .git&#x2F;ref&#x2F;tags</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 删除标签的命令为: git tag -d [标签名]</span><br><span class="line">&#x2F;&#x2F; 执行命令如下：</span><br><span class="line"></span><br><span class="line">$ git tag -d v1.0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-4-将本地标签推送到远程仓库"><a href="#1-4-将本地标签推送到远程仓库" class="headerlink" title="1.4 将本地标签推送到远程仓库"></a>1.4 将本地标签推送到远程仓库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 首先，对前两个提交版本创建对应标签</span><br><span class="line">&#x2F;*</span><br><span class="line">e07fae8 Initial commit</span><br><span class="line">4f07e76 Create README.md</span><br><span class="line">052ec04 fix #1 addFile one.txt</span><br><span class="line">df01d49 Merge pull request #3 from JW04191215&#x2F;master</span><br><span class="line">*&#x2F;</span><br><span class="line">$ git tag 001 -m &#39;the first tag&#39; e07fae8</span><br><span class="line">$ git tag 002 -m &#39;the secone tag&#39;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 执行 git push origin [标签名] 推送标签到远程仓库</span><br><span class="line">$ git push origin 001</span><br><span class="line">&#x2F;&#x2F; 执行 git push origin --tags 可将全部的本地标签推送到远程仓库 </span><br></pre></td></tr></table></figure>
+
+<h4 id="1-5-删除远程仓库标签"><a href="#1-5-删除远程仓库标签" class="headerlink" title="1.5 删除远程仓库标签"></a>1.5 删除远程仓库标签</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 对应指令为：</span><br><span class="line">&#x2F;&#x2F; $ git push origin :refs&#x2F;tags&#x2F;[标签名]，标签名也就是文件名</span><br><span class="line"></span><br><span class="line">$ git push origin :refs&#x2F;tags&#x2F;001</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;注意： 这步操作只是删除了远程仓库的标签，并没有删除本地标签，因此，本地标签需要自己手动删除</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-6-签出版本"><a href="#1-6-签出版本" class="headerlink" title="1.6 签出版本"></a>1.6 签出版本</h4><p>​    现在介绍一下关于 “签出版本” 的操作，</p>
+<p>我们会见到类似这种说明：</p>
+<p>​    “如果你从 GitHub 上克隆了这个程序的仓库，那么可以在仓库主目录下执行 git checkout xxx 签出程序的这个版本。” </p>
+<p>​    其实<strong>签出版本</strong>就是指定<strong>某个提交版本</strong>创建一个<strong>新的分支</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;假定当前的 work 仓库就是一个程序，我们要签出 001 版本，执行以下步骤即可。</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;首先，执行 git checkout [标签名] 切换到之前的某个提交版本，然后执行 git checkout -b [新的分支名]</span><br><span class="line">$ git checkout 001 &#x2F;&#x2F;切换到001标签</span><br><span class="line">$ git checkout -b 001 &#x2F;&#x2F;创建一个001的新的本地分支branch</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;这样就完成了提交版本的签出工作</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、GitHub-的-releases"><a href="#二、GitHub-的-releases" class="headerlink" title="二、GitHub 的 releases"></a>二、GitHub 的 releases</h3><p>GitHub 的 releases 是 2013 年发布的新功能，旨在协助软件开发者分发新版本给用户，关于这个功能这里仅作简单介绍。</p>
+<p>当项目组织宣布发布一个软件产品的版本，发布过程就是一个将软件交付给最终用户的工作流。版本是具有修改日志和二进制文件的一类对象，它们提供了 Git 工作流之外的完整项目历史，它们也可以从存储库的主页上被访问。发布版 release 附带发布说明和下载软件或源代码的链接。按照许多 Git 项目的约定，发布版本与 Git 的标签 tag 绑定。您可以使用现有的标签，或者让 release 在发布时创建标签。这就是上面查看 GitHub 仓库中标签信息时出现的场景。</p>
+<p>标签是 Git 中的概念，而 releases 则是 Github、码云等源码托管商所提供的更高层的概念。Git 本身是没有 releases 这个概念，只有 tag。两者之间的关系则是，release 基于 tag，为 tag 添加更丰富的信息，一般是编译好的文件。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/04/git%E5%AD%A6%E4%B9%A0%E5%9B%9B-%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9Cgit%E9%83%A8%E5%88%86/" rel="prev" title="git学习四-多人协作git部分">
+      <i class="fa fa-chevron-left"></i> git学习四-多人协作git部分
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/04/git%E5%AD%A6%E4%B9%A0%E5%85%AD-%E5%A4%84%E7%90%86bug/" rel="next" title="git学习六-处理bug">
+      git学习六-处理bug <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Git%E6%A0%87%E7%AD%BE%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">一、Git标签的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-%E5%88%9B%E5%BB%BA%E6%A0%87%E7%AD%BE"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 创建标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E6%9F%A5%E7%9C%8B%E6%A0%87%E7%AD%BE"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 查看标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0%E6%A0%87%E7%AD%BE"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 删除本地标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-%E5%B0%86%E6%9C%AC%E5%9C%B0%E6%A0%87%E7%AD%BE%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 将本地标签推送到远程仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%A0%87%E7%AD%BE"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 删除远程仓库标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-%E7%AD%BE%E5%87%BA%E7%89%88%E6%9C%AC"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 签出版本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81GitHub-%E7%9A%84-releases"><span class="nav-number">2.</span> <span class="nav-text">二、GitHub 的 releases</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="伍裕丰"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">伍裕丰</p>
+  <div class="site-description" itemprop="description">伍裕丰的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/coderwuyf" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;coderwuyf" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/13036687205@163.com" title="E-Mail → 13036687205@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">伍裕丰</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
