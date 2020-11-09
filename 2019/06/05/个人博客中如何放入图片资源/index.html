@@ -20,19 +20,23 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="BUG分支1. 储存当前分支当接到一个代号101的bug任务时，必然需要创建一个名为issue-101的分支来对bug进行修复，可此时却在dev分支上的工作还未提交  此时需要优先处理bug该怎么办？">
+  <meta name="description" content="当一篇文章中，从头到尾都是文字，那么阅读体验一定是不好的。要图文并茂，才会使得文章得阅读体验得到大幅度得提升。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git学习六-处理bug">
-<meta property="og:url" content="http://example.com/2019/08/10/git%E5%AD%A6%E4%B9%A0%E5%85%AD-%E5%A4%84%E7%90%86bug/index.html">
+<meta property="og:title" content="个人博客中如何放入图片资源?">
+<meta property="og:url" content="http://example.com/2019/06/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A6%82%E4%BD%95%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/index.html">
 <meta property="og:site_name" content="coder伍-个人博客">
-<meta property="og:description" content="BUG分支1. 储存当前分支当接到一个代号101的bug任务时，必然需要创建一个名为issue-101的分支来对bug进行修复，可此时却在dev分支上的工作还未提交  此时需要优先处理bug该怎么办？">
+<meta property="og:description" content="当一篇文章中，从头到尾都是文字，那么阅读体验一定是不好的。要图文并茂，才会使得文章得阅读体验得到大幅度得提升。">
 <meta property="og:locale" content="zh_HK">
-<meta property="article:published_time" content="2019-08-10T09:04:23.000Z">
-<meta property="article:modified_time" content="2020-11-09T06:19:20.065Z">
+<meta property="og:image" content="http://example.com/2019/06/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A6%82%E4%BD%95%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9.png">
+<meta property="og:image" content="http://example.com/2019/06/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A6%82%E4%BD%95%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6.png">
+<meta property="og:image" content="http://example.com/2019/06/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A6%82%E4%BD%95%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84.png">
+<meta property="article:published_time" content="2019-06-05T07:42:29.000Z">
+<meta property="article:modified_time" content="2020-11-09T06:23:13.328Z">
 <meta property="article:author" content="伍裕丰">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/06/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A6%82%E4%BD%95%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9.png">
 
-<link rel="canonical" href="http://example.com/2019/08/10/git%E5%AD%A6%E4%B9%A0%E5%85%AD-%E5%A4%84%E7%90%86bug/">
+<link rel="canonical" href="http://example.com/2019/06/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A6%82%E4%BD%95%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/">
 
 
 <script id="page-configurations">
@@ -45,7 +49,7 @@
   };
 </script>
 
-  <title>git学习六-处理bug | coder伍-个人博客</title>
+  <title>个人博客中如何放入图片资源? | coder伍-个人博客</title>
   
 
 
@@ -151,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-HK">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/08/10/git%E5%AD%A6%E4%B9%A0%E5%85%AD-%E5%A4%84%E7%90%86bug/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/06/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A6%82%E4%BD%95%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -164,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          git学习六-处理bug
+          个人博客中如何放入图片资源?
         </h1>
 
         <div class="post-meta">
@@ -174,14 +178,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-08-10 17:04:23" itemprop="dateCreated datePublished" datetime="2019-08-10T17:04:23+08:00">2019-08-10</time>
+              <time title="创建时间：2019-06-05 15:42:29" itemprop="dateCreated datePublished" datetime="2019-06-05T15:42:29+08:00">2019-06-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-09 14:19:20" itemprop="dateModified" datetime="2020-11-09T14:19:20+08:00">2020-11-09</time>
+                <time title="修改时间：2020-11-09 14:23:13" itemprop="dateModified" datetime="2020-11-09T14:23:13+08:00">2020-11-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -189,7 +193,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                  <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">个人博客</span></a>
                 </span>
             </span>
 
@@ -201,6 +205,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">当一篇文章中，从头到尾都是文字，那么阅读体验一定是不好的。要图文并茂，才会使得文章得阅读体验得到大幅度得提升。</div>
 
         </div>
       </header>
@@ -211,61 +216,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="BUG分支"><a href="#BUG分支" class="headerlink" title="BUG分支"></a>BUG分支</h1><h2 id="1-储存当前分支"><a href="#1-储存当前分支" class="headerlink" title="1. 储存当前分支"></a>1. 储存当前分支</h2><p>当接到一个代号101的bug任务时，必然需要创建一个名为<code>issue-101</code>的分支来对bug进行修复，可此时却在<code>dev</code>分支上的工作还未提交</p>
-<blockquote>
-<p>此时需要优先处理bug该怎么办？</p>
-</blockquote>
-<a id="more"></a>
+        <h2 id="用hexo框架搭建得博客如何插入图片呢？"><a href="#用hexo框架搭建得博客如何插入图片呢？" class="headerlink" title="用hexo框架搭建得博客如何插入图片呢？"></a>用hexo框架搭建得博客如何插入图片呢？</h2><p>首先，我们要知道到，在MarkDown中，插入图片格式是<code>![]()</code>,<code>[]</code>中括号中是对图片的描述，<code>()</code>小括号中是图片的路径。</p>
+<p>由于写好的博客，最终是部署在网站上的，因此就不能使用绝对路径来放入图片，只能使用相对路径！</p>
+<p>在知道使用相对路径之后，又有一个问题来了，那图片应该放在哪才行呢？</p>
+<h3 id="一、更改hexo的配置，自动生成文章资源文件夹"><a href="#一、更改hexo的配置，自动生成文章资源文件夹" class="headerlink" title="一、更改hexo的配置，自动生成文章资源文件夹"></a>一、更改hexo的配置，自动生成文章资源文件夹</h3><p>首先进入到<strong>本地个人博客的根目录</strong>下</p>
+<p>使用<code>VSCode</code>,打开hexo的配置文件<code>_config.yml</code></p>
+<p>更改下面这个属性，将false改成true</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
-<p>此时就需要使用到Git的<code>stash</code>功能，此命令可以将目前正在进行的分支进行“储藏”起来，之后再对其进行恢复</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git stash</span><br></pre></td></tr></table></figure>
+<p>修改并保存之后</p>
+<p>打开cmd命令行，cd到<strong>本地个人博客的根目录</strong>输入指令新建一篇文章</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;test&quot;</span><br></pre></td></tr></table></figure>
 
-<p>此时，<code>git stash</code>查看工作区，就是干净的（除了没有被Git管理的文件），因此可以放心的创建分支来修复bug</p>
-<blockquote>
-<p>此时注意，首先要切换至主分支<code>master</code>，然后再创建新的分支<code>issue-101</code></p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master</span><br><span class="line">$ git checkout -b issue-101</span><br></pre></td></tr></table></figure>
+<p>然后依次打开source =&gt; _posts这两个文件夹，就会发现除了test.md文件，还有一个与文章名一样的test文件夹也被创建了，而这个test文件夹就是<strong>用来存放文章中被引用到的各种图片资源 的 资源文件夹</strong>。</p>
+<p><img src="/2019/06/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A6%82%E4%BD%95%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9.png" alt="资源文件夹"></p>
+<h3 id="二、安装插件"><a href="#二、安装插件" class="headerlink" title="二、安装插件"></a>二、安装插件</h3><p>再次打开cmd命令行，cd到<strong>本地个人博客的根目录</strong>，执行安装命令</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/CodeFalling/hexo-asset-image --save</span><br></pre></td></tr></table></figure>
 
-<p>然后就开始bug的修复，直到bug修复完成，然后提交</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git add [文件名]</span><br><span class="line">$ git commit -m <span class="string">&quot;fix bug 101&quot;</span></span><br><span class="line"><span class="comment">#视情况而定是否push</span></span><br><span class="line">[可选] $ git push .... </span><br></pre></td></tr></table></figure>
-
-<p>提交之后，切换回<code>master</code>分支，然后删除<code>issue-101</code>分支</p>
-<blockquote>
-<p>现在bug已经修复完成，切换至<code>dev</code>分支，此时使用<code>git status</code>一看，发现工作区是干净的，那刚才的工作现场到哪去了呢？</p>
-</blockquote>
-<p>使用<code>git stash list</code>命令查看缓存列表</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git stash list</span><br><span class="line"><span class="comment">#此处显示之前stash下来的历史</span></span><br></pre></td></tr></table></figure>
-
-<p>此时可以看到之前使用<code>git stash</code>储存下来的各个分支，可怎样才能恢复呢？</p>
-<h2 id="2-恢复存储的分支"><a href="#2-恢复存储的分支" class="headerlink" title="2. 恢复存储的分支"></a>2. 恢复存储的分支</h2><p>方法有二：</p>
-<ol>
-<li><code>git stash pop</code>：恢复最近的一条stash的同时把stash内容也删了</li>
-<li><code>git stash apply</code>: 此命令恢复之后，stash中的内容会继续保存，如要删除，则需要使用<code>git stash drop</code>命令删除</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#恢复stash的同时，删除stash内容</span></span><br><span class="line">$ git stash pop</span><br><span class="line"></span><br><span class="line"><span class="comment">#仅恢复stash的内容，之前stash的内容会保存下来</span></span><br><span class="line">$ git stash apply</span><br><span class="line"><span class="comment">#删除stash内容的方法如下</span></span><br><span class="line">$ git stash drop</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>那要怎样恢复指定的stash呢？</p>
-</blockquote>
-<p>首先，使用命令<code>git stash list</code>查看stash的历史记录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git satsh lish</span><br><span class="line"><span class="comment">#此处显示stash@&#123;索引值&#125; WIP on dev: [哈希值]...</span></span><br></pre></td></tr></table></figure>
-
-<p>找到需要恢复的<code>stash</code>索引值，例如stash@{0}</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git stash apply stash@&#123;0&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此时恢复完成！</p>
-<h2 id="3-自动覆盖改动的部分"><a href="#3-自动覆盖改动的部分" class="headerlink" title="3. 自动覆盖改动的部分"></a>3. 自动覆盖改动的部分</h2><p>在<code>master</code>分支上<code>merge</code>合并分支<code>issue-101</code>分支，修复了bug之后，我们要想一想，由于<code>dev</code>由于是早期从<code>master</code>分支分出来的，那么在<code>dev</code>分支中bug依旧存在。</p>
-<blockquote>
-<p>如何在<code>dev</code>分支上修复<code>issue-101</code>分支中修复的bug呢？</p>
-</blockquote>
-<p>第一步，找到提交修复bug的版本号</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># --oneline 表示只显示一行， -1 表示显示最近一条的提交记录</span></span><br><span class="line">$ git <span class="built_in">log</span> --oneline -1</span><br></pre></td></tr></table></figure>
-
-<p>此时可以得到提交的版本号，例如：<code>4c8050e2</code></p>
-<p>使用<code>cherry-pick</code>命令，可以让我们复制一个特定的分支的<strong>提交内容</strong>到当前分支</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看当前分支</span></span><br><span class="line">$ git branch</span><br><span class="line"><span class="comment">######显示内容如下</span></span><br><span class="line"><span class="comment">#*dev</span></span><br><span class="line"><span class="comment"># master</span></span><br><span class="line"><span class="comment">#使用 cherry-pick</span></span><br><span class="line">$ git cherry-pick 4c805e2</span><br></pre></td></tr></table></figure>
-
-<p>此时会发现系统自动给<code>dev</code>分支做了一次提交，此次提交的版本号为<code>1d4b803</code>，虽然两次的改动是相同的，但是两次的版本号是不相同的，因为是两次不同的commit。使用cherry-pick就不需要再<code>dev</code>分支点上手动再将修复过得bug再重复一遍了。</p>
+<p><img src="/2019/06/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A6%82%E4%BD%95%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6.png" alt="安装插件"></p>
+<p>这样插件就安装成功了</p>
+<h3 id="三、在文章中插入图片"><a href="#三、在文章中插入图片" class="headerlink" title="三、在文章中插入图片"></a>三、在文章中插入图片</h3><p>这下就能放心的在文章中插图图片了，不过再次提醒一下，要用相对路径哦！</p>
+<p><img src="/2019/06/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E5%A6%82%E4%BD%95%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84.png" alt="图片路径"></p>
 
     </div>
 
@@ -281,12 +252,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/08/09/git%E5%AD%A6%E4%B9%A0%E4%BA%94-tag%E5%92%8Creleases/" rel="prev" title="git学习五-tag和releases">
-      <i class="fa fa-chevron-left"></i> git学习五-tag和releases
+    <a href="/2019/05/01/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" rel="prev" title="如何创建属于自己的个人博客">
+      <i class="fa fa-chevron-left"></i> 如何创建属于自己的个人博客
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/11/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E4%B9%8B%E6%B7%BB%E5%8A%A0%E5%8A%A8%E6%80%81%E7%B2%92%E5%AD%90%E8%83%8C%E6%99%AF/" rel="next" title="个人博客美化之添加动态粒子背景">
-      个人博客美化之添加动态粒子背景 <i class="fa fa-chevron-right"></i>
+    <a href="/2019/08/04/git%E5%AD%A6%E4%B9%A0%E4%B8%80-git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" rel="next" title="git学习一-git的基础操作">
+      git学习一-git的基础操作 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -346,7 +317,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BUG%E5%88%86%E6%94%AF"><span class="nav-number">1.</span> <span class="nav-text">BUG分支</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%82%A8%E5%AD%98%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF"><span class="nav-number">1.1.</span> <span class="nav-text">1. 储存当前分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%81%A2%E5%A4%8D%E5%AD%98%E5%82%A8%E7%9A%84%E5%88%86%E6%94%AF"><span class="nav-number">1.2.</span> <span class="nav-text">2. 恢复存储的分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%87%AA%E5%8A%A8%E8%A6%86%E7%9B%96%E6%94%B9%E5%8A%A8%E7%9A%84%E9%83%A8%E5%88%86"><span class="nav-number">1.3.</span> <span class="nav-text">3. 自动覆盖改动的部分</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E5%BE%97%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E5%91%A2%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">用hexo框架搭建得博客如何插入图片呢？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%9B%B4%E6%94%B9hexo%E7%9A%84%E9%85%8D%E7%BD%AE%EF%BC%8C%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%96%87%E7%AB%A0%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">1.1.</span> <span class="nav-text">一、更改hexo的配置，自动生成文章资源文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">二、安装插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%9C%A8%E6%96%87%E7%AB%A0%E4%B8%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87"><span class="nav-number">1.3.</span> <span class="nav-text">三、在文章中插入图片</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
