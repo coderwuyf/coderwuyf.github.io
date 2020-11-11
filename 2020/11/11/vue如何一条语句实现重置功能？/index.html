@@ -20,17 +20,18 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="伍裕丰的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="coder伍-个人博客">
-<meta property="og:url" content="http://example.com/categories/git/index.html">
+  <meta name="description" content="使用场景：  重置搜索框的内容 重置表单数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue如何一条语句实现重置功能？">
+<meta property="og:url" content="http://example.com/2020/11/11/vue%E5%A6%82%E4%BD%95%E4%B8%80%E6%9D%A1%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E9%87%8D%E7%BD%AE%E5%8A%9F%E8%83%BD%EF%BC%9F/index.html">
 <meta property="og:site_name" content="coder伍-个人博客">
-<meta property="og:description" content="伍裕丰的个人博客">
+<meta property="og:description" content="使用场景：  重置搜索框的内容 重置表单数据">
 <meta property="og:locale" content="zh_HK">
+<meta property="article:published_time" content="2020-11-11T01:18:15.000Z">
 <meta property="article:author" content="伍裕丰">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/categories/git/">
+<link rel="canonical" href="http://example.com/2020/11/11/vue%E5%A6%82%E4%BD%95%E4%B8%80%E6%9D%A1%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E9%87%8D%E7%BD%AE%E5%8A%9F%E8%83%BD%EF%BC%9F/">
 
 
 <script id="page-configurations">
@@ -38,12 +39,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-HK'
   };
 </script>
 
-  <title>分类: git | coder伍-个人博客</title>
+  <title>vue如何一条语句实现重置功能？ | coder伍-个人博客</title>
   
 
 
@@ -142,151 +143,123 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">git
-          <small>分类</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-HK">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/11/vue%E5%A6%82%E4%BD%95%E4%B8%80%E6%9D%A1%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E9%87%8D%E7%BD%AE%E5%8A%9F%E8%83%BD%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="伍裕丰">
+      <meta itemprop="description" content="伍裕丰的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder伍-个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue如何一条语句实现重置功能？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-11 09:18:15" itemprop="dateCreated datePublished" datetime="2020-11-11T09:18:15+08:00">2020-11-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2019</span>
-    </div>
+        <p>使用场景：</p>
+<ul>
+<li>重置搜索框的内容</li>
+<li>重置表单数据</li>
+</ul>
+<a id="more"></a>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>假设data中的表单数据为</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">studentInfo: &#123;</span><br><span class="line">  name: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  age:  <span class="number">0</span>,</span><br><span class="line">  sex: <span class="string">&#x27;man&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-10T17:04:23+08:00"
-              content="2019-08-10">
-          08-10
-        </time>
-      </div>
+<p>在重置功能中，就可以使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(<span class="built_in">this</span>.student, <span class="built_in">this</span>.$option.data().student);</span><br></pre></td></tr></table></figure>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/08/10/git%E5%AD%A6%E4%B9%A0%E5%85%AD-%E5%A4%84%E7%90%86bug/" itemprop="url">
-            <span itemprop="name">git学习六-处理bug</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-09T17:03:45+08:00"
-              content="2019-08-09">
-          08-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/08/09/git%E5%AD%A6%E4%B9%A0%E4%BA%94-tag%E5%92%8Creleases/" itemprop="url">
-            <span itemprop="name">git学习五-tag和releases</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-07T16:55:19+08:00"
-              content="2019-08-07">
-          08-07
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/08/07/git%E5%AD%A6%E4%B9%A0%E5%9B%9B-%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9Cgit%E9%83%A8%E5%88%86/" itemprop="url">
-            <span itemprop="name">git学习四-多人协作git部分</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-06T16:25:13+08:00"
-              content="2019-08-06">
-          08-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/08/06/git%E5%AD%A6%E4%B9%A0%E4%B8%89-github/" itemprop="url">
-            <span itemprop="name">git学习三-github</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-05T16:11:02+08:00"
-              content="2019-08-05">
-          08-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/08/05/git%E5%AD%A6%E4%B9%A0%E4%BA%8C-git%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C/" itemprop="url">
-            <span itemprop="name">git学习二-git分支操作</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-04T14:08:27+08:00"
-              content="2019-08-04">
-          08-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/08/04/git%E5%AD%A6%E4%B9%A0%E4%B8%80-git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" itemprop="url">
-            <span itemprop="name">git学习一-git的基础操作</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
+<p>就可以实现将这个对象回复成初始设定的值</p>
+<p>就可以实现将这个对象回复成初始设定的值</p>
+<p>这个语句中，需要理解的由两个知识点</p>
+<ul>
+<li><p>Object.assign()</p>
+</li>
+<li><p>vue中this.$option</p>
+</li>
+</ul>
+<p><strong>1.Object.assign(target, source1, source2, …)一般用于作为对象的浅复制。</strong><br>该方法实现的功能：将若干个源对象source1, source2, …中的属性值浅复制给目标对象target，同时有个和target相同的返回值，可以通过另一个变量进行接收。</p>
+<blockquote>
+<p><strong>什么是浅复制呢？</strong></p>
+<p>现在通过上面的例子进行讲解<br>也就是说如果上面例子中student中若存在一个数组属性position:[],<br>那么，通过Object.assign()复制得到的target中的position属性的属性值将会是 ‘类似于’ 源对象中空对象[]的指针，或者是地址。<br>当改变target中的position的值时，源对象中的position的值也会发生改变。</p>
+<p>因此</p>
+<p><strong>注意</strong>：如果需要重置的对象中的任意属性<strong>不要</strong>以<strong>数组</strong>或<strong>对象</strong>等引用类型作为属性值。</p>
+</blockquote>
+<p><strong>2.什么是this.$option</strong><br>在vue中，this一般都是指代vue实例，或组件实例</p>
+<p>通过this.$option就可以拿到optionAPI中的数据了，而optionAPI中的值一般都是各个属性的初始值</p>
+<p>综上所述，这样就能实现重置功能了。</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E4%B9%8B%E6%B7%BB%E5%8A%A0%E5%8A%A8%E6%80%81%E7%B2%92%E5%AD%90%E8%83%8C%E6%99%AF/" rel="prev" title="个人博客美化之添加动态粒子背景">
+      <i class="fa fa-chevron-left"></i> 个人博客美化之添加动态粒子背景
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
