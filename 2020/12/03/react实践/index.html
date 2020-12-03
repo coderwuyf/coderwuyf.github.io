@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="框架React、umijs、davjs;UI框架ant design">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何新建ant design pro的页面">
+<meta property="og:url" content="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="coder伍-个人博客">
+<meta property="og:description" content="框架React、umijs、davjs;UI框架ant design">
+<meta property="og:locale" content="zh_HK">
+<meta property="og:image" content="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA.png">
+<meta property="og:image" content="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/router%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/MyList%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%AF%BC%E5%85%A5.png">
+<meta property="og:image" content="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D.png">
+<meta property="og:image" content="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D.png">
+<meta property="og:image" content="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/model%E7%9A%84%E5%88%9B%E5%BB%BA.png">
+<meta property="og:image" content="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/model%E5%AF%B9%E8%B1%A1.png">
+<meta property="og:image" content="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/models%E6%96%87%E4%BB%B6.png">
+<meta property="article:published_time" content="2020-12-03T05:55:45.000Z">
+<meta property="article:author" content="伍裕丰">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA.png">
+
+<link rel="canonical" href="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-HK'
+  };
+</script>
+
+  <title>如何新建ant design pro的页面 | coder伍-个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder伍-个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">coder伍-个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-HK">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/03/react%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="伍裕丰">
+      <meta itemprop="description" content="伍裕丰的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder伍-个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何新建ant design pro的页面
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-03 13:55:45" itemprop="dateCreated datePublished" datetime="2020-12-03T13:55:45+08:00">2020-12-03</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">框架React、umijs、davjs;UI框架ant design</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="1-在对应模块文件夹中新建关于页面的-js和-less文件"><a href="#1-在对应模块文件夹中新建关于页面的-js和-less文件" class="headerlink" title="1.在对应模块文件夹中新建关于页面的.js和.less文件"></a>1.在对应模块文件夹中新建关于页面的.js和.less文件</h3><p>以<code>MyList</code>页面为例，这个页面是在<code>list</code>模块下，因此将这个页面的文件创建在<code>list文件夹下</code></p>
+<p><img src="/2020/12/03/react%E5%AE%9E%E8%B7%B5/%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA.png" alt="文件创建"></p>
+<h3 id="2-更改路由"><a href="#2-更改路由" class="headerlink" title="2.更改路由"></a>2.更改路由</h3><p>在ant design pro项目中，有一个config文件夹，用于放置有关webpack的配置，在webpack配置中进行路由的配置，一般都会将router配置抽离到单独的文件夹下<code>router.config.js</code></p>
+<p>进入<code>router.config.js</code>文件中，进行路由配置</p>
+<p>因为<code>MyList</code>页面是放在<code>list</code>中的因此，就在<code>list</code>路由中配置<code>MyList</code>子路由</p>
+<p><img src="/2020/12/03/react%E5%AE%9E%E8%B7%B5/router%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png" alt="router配置文件"></p>
+<p><img src="/2020/12/03/react%E5%AE%9E%E8%B7%B5/MyList%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE.png" alt="页面路由的配置"></p>
+<p><strong>注意：</strong>component中的文件名不区分大小写，这里我写的<code>./List/myList</code>，而我的文件名写的<code>MyList</code>,能够正常运行</p>
+<h3 id="3-配置侧边栏导航"><a href="#3-配置侧边栏导航" class="headerlink" title="3.配置侧边栏导航"></a>3.配置侧边栏导航</h3><p>因为之前使用的是<code>BasicLayout</code>布局，在<code>BasicLayout</code>组件中，导入了一个<code>SiderMenu</code>组件</p>
+<p><img src="/2020/12/03/react%E5%AE%9E%E8%B7%B5/%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%AF%BC%E5%85%A5.png" alt="侧边栏的引入以及数据的传入"></p>
+<p>图中①表示<code>BasicLayout</code>文件，②表示最终渲染的的是layout这个react组件，③表示的是layout组件，④表示传入侧边栏的数据</p>
+<p>中间的格式化过程太过繁琐，此处不做描述</p>
+<p>最终会在<code>src/locales</code>中进行字符串的匹配</p>
+<p><img src="/2020/12/03/react%E5%AE%9E%E8%B7%B5/%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D.png" alt="侧边栏字符串匹配"></p>
+<p><img src="/2020/12/03/react%E5%AE%9E%E8%B7%B5/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D.png" alt="字符串匹配"></p>
+<h3 id="4-页面创建成功，开始开发页面"><a href="#4-页面创建成功，开始开发页面" class="headerlink" title="4.页面创建成功，开始开发页面"></a>4.页面创建成功，开始开发页面</h3><p>下面直接粘贴代码，通过注释的方式进行代码解释</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; PureComponent &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Table, Card &#125; <span class="keyword">from</span> <span class="string">&#x27;antd&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> PageHeaderWrapper <span class="keyword">from</span> <span class="string">&#x27;@/components/PageHeaderWrapper&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">&#x27;dva&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过connect将class组件和models连接起来，将myModels的数据作为class组件的参数</span></span><br><span class="line"><span class="comment">// loading的使用: 将loading作为传入connect的第一个参数，loading中的models包含当前文件夹下所有的models</span></span><br><span class="line"><span class="comment">// loading.models.myModels的值为true/false，表示这个models中effect操作的开始和结束</span></span><br><span class="line">@connect(<span class="function">(<span class="params">&#123; myModels, loading &#125;</span>) =&gt;</span> (&#123;</span><br><span class="line">  myModels,</span><br><span class="line">  loading: loading.models.myModels,</span><br><span class="line">&#125;))</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyList</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 把columns给到MyList组件中</span></span><br><span class="line">    <span class="built_in">this</span>.columns = [</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">&#x27;姓名&#x27;</span>,</span><br><span class="line">        dataIndex: <span class="string">&#x27;name&#x27;</span>,</span><br><span class="line">        key: <span class="string">&#x27;name&#x27;</span>,</span><br><span class="line">        width: <span class="string">&#x27;10%&#x27;</span>,</span><br><span class="line">        align: <span class="string">&#x27;center&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">&#x27;性别&#x27;</span>,</span><br><span class="line">        dataIndex: <span class="string">&#x27;sex&#x27;</span>,</span><br><span class="line">        key: <span class="string">&#x27;sex&#x27;</span>,</span><br><span class="line">        width: <span class="string">&#x27;10%&#x27;</span>,</span><br><span class="line">        align: <span class="string">&#x27;center&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">&#x27;年龄&#x27;</span>,</span><br><span class="line">        dataIndex: <span class="string">&#x27;age&#x27;</span>,</span><br><span class="line">        key: <span class="string">&#x27;age&#x27;</span>,</span><br><span class="line">        width: <span class="string">&#x27;10%&#x27;</span>,</span><br><span class="line">        align: <span class="string">&#x27;center&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">&#x27;电话&#x27;</span>,</span><br><span class="line">        dataIndex: <span class="string">&#x27;phone&#x27;</span>,</span><br><span class="line">        key: <span class="string">&#x27;phone&#x27;</span>,</span><br><span class="line">        width: <span class="string">&#x27;70%&#x27;</span>,</span><br><span class="line">        align: <span class="string">&#x27;center&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 最小化state</span></span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      params: &#123;</span><br><span class="line">        page: <span class="number">1</span>,</span><br><span class="line">        limit: <span class="number">10</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 通过之前的connect，将myModels中的dispatch传入到props中</span></span><br><span class="line">    <span class="keyword">const</span> &#123; dispatch &#125; = <span class="built_in">this</span>.props;</span><br><span class="line">    <span class="keyword">const</span> &#123; params &#125; = <span class="built_in">this</span>.state;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用dispatch方法, 执行myModels中的effects的fetch, 参数为payload</span></span><br><span class="line">    dispatch(&#123;</span><br><span class="line">      type: <span class="string">&#x27;myModels/fetch&#x27;</span>,</span><br><span class="line">      payload: params,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handlePageChange = <span class="function">(<span class="params">page</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; dispatch &#125; = <span class="built_in">this</span>.props;</span><br><span class="line">    dispatch(&#123;</span><br><span class="line">      type: <span class="string">&#x27;myModels/fetch&#x27;</span>,</span><br><span class="line">      payload: &#123;</span><br><span class="line">        page,</span><br><span class="line">        limit: <span class="number">10</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;分页组件被点击了&#x27;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.props);</span><br><span class="line">    <span class="keyword">const</span> &#123; myModels, loading &#125; = <span class="built_in">this</span>.props;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;PageHeaderWrapper title=<span class="string">&quot;列表&quot;</span>&gt;</span><br><span class="line">        &lt;Card&gt;</span><br><span class="line">          &lt;Table</span><br><span class="line">            bordered</span><br><span class="line">            loading=&#123;loading&#125;</span><br><span class="line">            dataSource=&#123;myModels.data&#125;</span><br><span class="line">            columns=&#123;<span class="built_in">this</span>.columns&#125;</span><br><span class="line">            pagination=&#123;</span><br><span class="line">              &#123;</span><br><span class="line">                pageSize: <span class="number">10</span>,</span><br><span class="line">                total: myModels.total,</span><br><span class="line">                onChange: <span class="built_in">this</span>.handlePageChange</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            rowKey=&#123;<span class="function"><span class="params">row</span> =&gt;</span> row.id&#125;</span><br><span class="line">          /&gt;;</span><br><span class="line">        &lt;/Card&gt;</span><br><span class="line">      &lt;/PageHeaderWrapper&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> MyList;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在页面中，使用到了一共有三类数据，一个是通过model中通过接口调用获取到的表格数据<code>myModels</code>，一个是state中用于提交接口参数的数据``params<code>，还有一个就是用于配置表格的数据</code>columns`</p>
+<p>因为使用到了<code>models</code>，因此就需要创建一个<code>models</code>文件夹, 然后再创建一个有关于models的js文件，<code>文件名可以任意取</code>，但为了方便查看, 建议models的文件名和文件中到处的namespace的值保持一致</p>
+<p>这里我就使用<code>myModels.js</code></p>
+<p><strong>注意：</strong>这里的文件名首字母必须是小写，否则TS检查会报错<code>TS1128: Declaration or statement expected</code></p>
+<p><img src="/2020/12/03/react%E5%AE%9E%E8%B7%B5/model%E7%9A%84%E5%88%9B%E5%BB%BA.png" alt="model文件的创建"></p>
+<p>接下来就粘贴代码，通过代码中的注释进行说明</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 因为涉及到接口的请求，所以需要在/services/api.js文件中写好调用接口的方法</span></span><br><span class="line"><span class="keyword">import</span> &#123; queryMyListData &#125; <span class="keyword">from</span> <span class="string">&#x27;@/services/api&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  namespace: <span class="string">&#x27;myModels&#x27;</span>,</span><br><span class="line"></span><br><span class="line">  state: &#123;</span><br><span class="line">    data: [],</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  effects: &#123;</span><br><span class="line">    *<span class="function"><span class="title">fetch</span>(<span class="params">&#123; payload &#125;, &#123; call, put &#125;</span>)</span> &#123;</span><br><span class="line">      <span class="comment">// 首先执行call(), 调用service/api中的queryMyListData方法, 因为yield关键字, 等待接口返回数据</span></span><br><span class="line">      <span class="keyword">const</span> response = <span class="keyword">yield</span> call(queryMyListData, payload);</span><br><span class="line">      <span class="comment">// 用response接收返回的数据结果</span></span><br><span class="line">      <span class="comment">// 然后执行put(), 执行reducers中与type相同的方法, 发送一个action</span></span><br><span class="line">      <span class="keyword">yield</span> put(&#123;</span><br><span class="line">        type: <span class="string">&#x27;save&#x27;</span>,</span><br><span class="line">        payload: response</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  reducers: &#123;</span><br><span class="line">    <span class="function"><span class="title">save</span>(<span class="params">state, action</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; data, total &#125; = action.payload;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        ...state,</span><br><span class="line">        data,</span><br><span class="line">        total</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这时候可能会有所疑惑，是通过什么方式来把这个models文件中的内容和页面联系起来的呢？</p>
+<p>答案就是通过dva中的内置的<code>connect</code>方法来实现的，umi中通过内置的方法，将models中的数据放在一个总的model对象中，对象中通过<code>namespace</code>作为属性名来进行保存，值为models中的state中保存的值，如上面文件中的<code>data:[]</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 放到页面中的props中的数据结构如下</span></span><br><span class="line">myModels: &#123;</span><br><span class="line">  data: []</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>**补充： **通过<code>connect</code>传入的对象是全局的models加上当前模块中的models</p>
+<p><img src="/2020/12/03/react%E5%AE%9E%E8%B7%B5/model%E5%AF%B9%E8%B1%A1.png" alt="modeles"></p>
+<p><img src="/2020/12/03/react%E5%AE%9E%E8%B7%B5/models%E6%96%87%E4%BB%B6.png" alt="image-20201202194142190"></p>
+<p>接下来就是编写接口文件services文件夹下api文件中的内容</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> request <span class="keyword">from</span> <span class="string">&#x27;@/utils/request&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">queryMyListData</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 这个方法调用之后，继续调用utils/request中的request方法，传入一个url作为参数，类型为字符串, 等待服务器返回数据</span></span><br><span class="line">  <span class="keyword">return</span> request(<span class="string">`/api/test_api?<span class="subst">$&#123;stringify(params)&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-编写mock接口数据"><a href="#5-编写mock接口数据" class="headerlink" title="5.编写mock接口数据"></a>5.编写mock接口数据</h3><p>代码如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; parse &#125; <span class="keyword">from</span> <span class="string">&quot;url&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建所需要的数据</span></span><br><span class="line"><span class="keyword">const</span> tableListDataSource = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">46</span>; i += <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> num = [</span><br><span class="line">    (<span class="built_in">Math</span>.random() * <span class="number">10</span>).toFixed(<span class="number">0</span>)%<span class="number">10</span>,</span><br><span class="line">    (<span class="built_in">Math</span>.random() * <span class="number">10</span>).toFixed(<span class="number">0</span>)%<span class="number">10</span>,</span><br><span class="line">    (<span class="built_in">Math</span>.random() * <span class="number">10</span>).toFixed(<span class="number">0</span>)%<span class="number">10</span>,</span><br><span class="line">    (<span class="built_in">Math</span>.random() * <span class="number">10</span>).toFixed(<span class="number">0</span>)%<span class="number">10</span>,</span><br><span class="line">  ];</span><br><span class="line">  tableListDataSource.push(&#123;</span><br><span class="line">    id: i,</span><br><span class="line">    name: <span class="string">`TradeCode <span class="subst">$&#123;i&#125;</span>`</span>,</span><br><span class="line">    age: <span class="string">`<span class="subst">$&#123;(<span class="built_in">Math</span>.random() * <span class="number">100</span>).toFixed(<span class="number">0</span>)&#125;</span>`</span>,</span><br><span class="line">    sex: <span class="string">&#x27;男&#x27;</span>,</span><br><span class="line">    phone: <span class="string">`130-xxxx-<span class="subst">$&#123;num.join(<span class="string">&#x27;&#x27;</span>)&#125;</span>`</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模拟网络延迟</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">millisecond</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      resolve()</span><br><span class="line">    &#125;, millisecond)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getList = <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 处理请求参数</span></span><br><span class="line">  <span class="keyword">const</span> url = req.url<span class="comment">// eslint-disable-line</span></span><br><span class="line">  <span class="keyword">const</span> params = parse(url, <span class="literal">true</span>).query;</span><br><span class="line">  <span class="comment">// 计算返回的数据的起始索引和终止索引</span></span><br><span class="line">  <span class="keyword">const</span> startIndex = (params.page-<span class="number">1</span>) * <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">const</span> endIndex = startIndex + <span class="number">10</span>;</span><br><span class="line">  <span class="comment">// 延迟一秒钟</span></span><br><span class="line">  <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line">  <span class="comment">// 通过res.json()来将数据转换成json对象, 然后通过return将数据返回至前端接口请求的位置</span></span><br><span class="line">  <span class="keyword">return</span> res.json(&#123;</span><br><span class="line">    data: tableListDataSource.slice(startIndex, endIndex),</span><br><span class="line">    total: <span class="number">46</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="string">&#x27;GET /api/test_api&#x27;</span>: getList,</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/05/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E4%B9%8B%E6%B7%BB%E5%8A%A0%E5%8A%A8%E6%80%81%E7%B2%92%E5%AD%90%E8%83%8C%E6%99%AF/" rel="prev" title="个人博客美化之添加动态粒子背景">
+      <i class="fa fa-chevron-left"></i> 个人博客美化之添加动态粒子背景
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9C%A8%E5%AF%B9%E5%BA%94%E6%A8%A1%E5%9D%97%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%96%B0%E5%BB%BA%E5%85%B3%E4%BA%8E%E9%A1%B5%E9%9D%A2%E7%9A%84-js%E5%92%8C-less%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">1.在对应模块文件夹中新建关于页面的.js和.less文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9B%B4%E6%94%B9%E8%B7%AF%E7%94%B1"><span class="nav-number">2.</span> <span class="nav-text">2.更改路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%AF%BC%E8%88%AA"><span class="nav-number">3.</span> <span class="nav-text">3.配置侧边栏导航</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%A1%B5%E9%9D%A2%E5%88%9B%E5%BB%BA%E6%88%90%E5%8A%9F%EF%BC%8C%E5%BC%80%E5%A7%8B%E5%BC%80%E5%8F%91%E9%A1%B5%E9%9D%A2"><span class="nav-number">4.</span> <span class="nav-text">4.页面创建成功，开始开发页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%BC%96%E5%86%99mock%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE"><span class="nav-number">5.</span> <span class="nav-text">5.编写mock接口数据</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="伍裕丰"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">伍裕丰</p>
+  <div class="site-description" itemprop="description">伍裕丰的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NvZGVyd3V5Zg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;coderwuyf"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/13036687205@163.com" title="E-Mail → 13036687205@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">伍裕丰</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9taXN0LnRoZW1lLW5leHQub3Jn">NexT.Mist</span> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.3' zIndex='-999' count='90' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
