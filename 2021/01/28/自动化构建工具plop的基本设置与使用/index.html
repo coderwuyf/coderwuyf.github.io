@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="一、什么是plopplop.js是一个基于node js所开发的小工具，主要作用是使用命令行的命令通过自己编写的模板生产目标文件与代码 目的是为了减少开发中的创建组件或页面时，重复代码的书写 应用场景：  【前端】vue&#x2F;react框架新建新的页面 【前端】根据接口文档，自动生成有关的代码（比如发送请求的函数）？ 【前端】redux有关代码的自动生成？ 对于某些不方便抽象的重复代码。比如前端某些类">
+  <meta name="description" content="一、什么是plopplop.js是一个基于node js所开发的小工具，主要作用是使用命令行的命令通过自己编写的模板生产目标文件与代码 目的是为了减少开发中的创建组件或页面时，重复代码的书写。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自动化构建工具plop的基本设置与使用">
 <meta property="og:url" content="http://example.com/2021/01/28/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7plop%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="coder伍-个人博客">
-<meta property="og:description" content="一、什么是plopplop.js是一个基于node js所开发的小工具，主要作用是使用命令行的命令通过自己编写的模板生产目标文件与代码 目的是为了减少开发中的创建组件或页面时，重复代码的书写 应用场景：  【前端】vue&#x2F;react框架新建新的页面 【前端】根据接口文档，自动生成有关的代码（比如发送请求的函数）？ 【前端】redux有关代码的自动生成？ 对于某些不方便抽象的重复代码。比如前端某些类">
+<meta property="og:description" content="一、什么是plopplop.js是一个基于node js所开发的小工具，主要作用是使用命令行的命令通过自己编写的模板生产目标文件与代码 目的是为了减少开发中的创建组件或页面时，重复代码的书写。">
 <meta property="og:locale" content="zh_HK">
 <meta property="og:image" content="http://example.com/2021/01/28/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7plop%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/plopfile%E6%96%87%E4%BB%B6.png">
 <meta property="og:image" content="http://example.com/2021/01/28/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7plop%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/packageJson%E5%86%85%E5%AE%B9.png">
@@ -211,7 +211,9 @@
 
       
         <h2 id="一、什么是plop"><a href="#一、什么是plop" class="headerlink" title="一、什么是plop"></a>一、什么是plop</h2><p><code>plop.js</code>是一个基于node js所开发的小工具，主要作用是使用命令行的<strong>命令</strong>通过<strong>自己编写的模板</strong>生产目标<strong>文件</strong>与<strong>代码</strong></p>
-<p>目的是为了减少开发中的创建组件或页面时，重复代码的书写</p>
+<p>目的是为了减少开发中的创建组件或页面时，重复代码的书写。</p>
+<a id="more"></a>
+
 <p><strong>应用场景：</strong></p>
 <ul>
 <li>【前端】vue/react框架新建新的页面</li>

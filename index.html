@@ -196,66 +196,15 @@
 
       
           <h2 id="一、什么是plop"><a href="#一、什么是plop" class="headerlink" title="一、什么是plop"></a>一、什么是plop</h2><p><code>plop.js</code>是一个基于node js所开发的小工具，主要作用是使用命令行的<strong>命令</strong>通过<strong>自己编写的模板</strong>生产目标<strong>文件</strong>与<strong>代码</strong></p>
-<p>目的是为了减少开发中的创建组件或页面时，重复代码的书写</p>
-<p><strong>应用场景：</strong></p>
-<ul>
-<li>【前端】vue/react框架新建新的页面</li>
-<li>【前端】根据接口文档，自动生成有关的代码（比如发送请求的函数）？</li>
-<li>【前端】redux有关代码的自动生成？</li>
-<li>对于某些不方便抽象的重复代码。比如前端某些类似的表格、表单、页面布局、类似的controller等，可以抽象为模板的代码</li>
-<li>【小程序】在使用非官方开发工具时，通过脚本来创建组件/页面，从而实现类似于微信开发者工具，一次性创建出wxml，wxss，js，json文件。并且可以自定义这些模板。</li>
-<li>其他与模板有关的功能。</li>
-</ul>
-<blockquote>
-<p>注：plop.js的终端交互使用了<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1NCb3Vkcmlhcy9JbnF1aXJlci5qcy8jcXVlc3Rpb24=">Inquirer.js<i class="fa fa-external-link-alt"></i></span>，所以也可以使用inquirer的插件对其功能进行扩展（比如选择文件夹）</p>
-</blockquote>
-<h2 id="二、开始"><a href="#二、开始" class="headerlink" title="二、开始"></a>二、开始</h2><h3 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h3><ol>
-<li>项目内安装</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i plop -D</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>全局安装</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i plop -D</span><br></pre></td></tr></table></figure>
-
-<p>若是使用项目内安装，在使用的时候就需要在package.json中添加scripts，通过npm指令来运行；若是使用全局安装就直接在项目文件夹下使用plop指令来运行。后面有详细讲解</p>
-<h3 id="2、创建plopfile-js"><a href="#2、创建plopfile-js" class="headerlink" title="2、创建plopfile.js"></a>2、创建plopfile.js</h3><ol>
-<li>在项目的根目录创建配置文件plopfile.js</li>
-</ol>
-<p><img src="/2021/01/28/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7plop%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/plopfile%E6%96%87%E4%BB%B6.png" alt="plopfile文件位置"></p>
-<ol start="2">
-<li>编写配置文件内容（这里以vue-cli4新创建的一个项目作为演示）</li>
-</ol>
-<p>预先操作：</p>
-<ul>
-<li><code>vue create plopdemo</code>创建一个vue项目，需要使用到vue-router</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">plop</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// create your generators here</span></span><br><span class="line">  plop.setGenerator(<span class="string">&#x27;basics&#x27;</span>, &#123;</span><br><span class="line">    <span class="comment">// description的内容会显示在控制台中</span></span><br><span class="line">    description: <span class="string">&#x27;this is a skeleton plopfile&#x27;</span>,</span><br><span class="line">    <span class="comment">// prompt(提示)-这是个数组，最终会被传递给inquirer（仅作了解）</span></span><br><span class="line">    prompts: [</span><br><span class="line">      &#123;</span><br><span class="line">        type: <span class="string">&#x27;input&#x27;</span>, <span class="comment">// 用来在终端输入文本</span></span><br><span class="line">        name: <span class="string">&#x27;name&#x27;</span>, <span class="comment">// 在 actions 中可以通过&#123;&#123;name&#125;&#125;取到这里输入的值，也可以通过&#123;&#123;name&#125;&#125;取到这个值</span></span><br><span class="line">        message: <span class="string">&#x27;请输入函数组件的名字（必填）&#x27;</span>, <span class="comment">// 这条提问会显示在控制台</span></span><br><span class="line">        <span class="function"><span class="title">validate</span>(<span class="params">val</span>)</span> &#123;</span><br><span class="line">          <span class="comment">// 如果验证不通过, 需要返回字符串, 字符串将会被展示在控制台（此处没有做任何验证）</span></span><br><span class="line">          <span class="comment">// 如果验证通过, 就返回true</span></span><br><span class="line">          <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">&#x27;default&#x27;</span> <span class="comment">// 默认值</span></span><br><span class="line">        <span class="comment">//更多详细内容请查看：https://github.com/SBoudrias/Inquirer.js#objects</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="comment">// actions-要执行的操作的列表</span></span><br><span class="line">    actions: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// 添加文件, src/components/&#123;&#123;name&#125;&#125;/index.js 文件内容为templateFile指定的内容</span></span><br><span class="line">        type: <span class="string">&#x27;add&#x27;</span>,</span><br><span class="line">        path: <span class="string">&#x27;src/views/&#123;&#123;name&#125;&#125;.vue&#x27;</span>,</span><br><span class="line">        <span class="comment">// 这里只是为了演示效果，所以使用了项目自带的About.vue文件</span></span><br><span class="line">        <span class="comment">// 当然官方推荐的是.hbs文件</span></span><br><span class="line">        templateFile: <span class="string">&#x27;src/views/About.vue&#x27;</span>,</span><br><span class="line">        <span class="comment">// 如果模板文件内容少，可以直接使用template指定</span></span><br><span class="line">        <span class="comment">// template: &#x27;&#x27;,</span></span><br><span class="line">        <span class="comment">// 在文件输出到硬盘前会调用transform函数</span></span><br><span class="line">        <span class="comment">// transforms: () =&gt; &#x27;&#x27;</span></span><br><span class="line">        <span class="comment">// 当执行这个actions, data会合并到prompt answers</span></span><br><span class="line">        <span class="comment">// data: &#123;&#125;</span></span><br><span class="line">        <span class="comment">// ...其他不常用的参数需要查看文档：https://plopjs.com/documentation/#built-in-actions</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// 修改src/index.js文件中的内容, 将 pattern 匹配到的内容，修改为 template 的内容</span></span><br><span class="line">        <span class="comment">// 注意：！！！（这里需要在router/index.js中添加一行,内容为：/* injectInfo */）！！！</span></span><br><span class="line">        type: <span class="string">&#x27;modify&#x27;</span>,</span><br><span class="line">        path: <span class="string">&#x27;src/router/index.js&#x27;</span>,</span><br><span class="line">        pattern: <span class="regexp">/(\/\* injectInfo \*\/)/</span>,</span><br><span class="line">        <span class="comment">// 一条路由配置</span></span><br><span class="line">        template: <span class="string">`&#123;</span></span><br><span class="line"><span class="string">    path: &#x27;/&#123;&#123;name&#125;&#125;&#x27;,</span></span><br><span class="line"><span class="string">    name: &#x27;&#123;&#123;name&#125;&#125;&#x27;,</span></span><br><span class="line"><span class="string">    component: () =&gt; import(&#x27;../views/&#123;&#123;name&#125;&#125;.vue&#x27;),</span></span><br><span class="line"><span class="string">  &#125;,</span></span><br><span class="line"><span class="string">  /* injectInfo */</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>到此就配置完成了，接下来就是运行</p>
-<h3 id="运行plop"><a href="#运行plop" class="headerlink" title="运行plop"></a>运行plop</h3><p>此处操作有两种，取决于安装方式，分别对应项目内安装与全局安装</p>
-<ol>
-<li>项目内安装</li>
-</ol>
-<p>首先在项目中找到<strong>package.json</strong>文件， 修改内容</p>
-<p><img src="/2021/01/28/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7plop%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/packageJson%E5%86%85%E5%AE%B9.png" alt="packageJson内容"></p>
-<p>然后再命令行中输入<code>npm run new</code></p>
-<p><img src="/2021/01/28/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7plop%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7plop%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8%5Cnpm%E6%93%8D%E4%BD%9C.png" alt="使用npm运行plop"></p>
-<p>提示新建组件的名字（此处我写的是MyComponent），按下回车</p>
-<p><img src="/2021/01/28/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7plop%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/plop%E8%BF%90%E8%A1%8C.png" alt="plop运行过程"></p>
-<p>显示结果</p>
-<p><img src="/2021/01/28/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7plop%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/%E7%BB%93%E6%9E%9C%E6%98%BE%E7%A4%BA.png" alt="操作结果显示"></p>
-<p>这时就会发现views文件夹下出现了一个MyComponent.vue文件，同时router.index中也添加了一条关于这个页面的路由信息</p>
-<p>操作完成。</p>
-<ol start="2">
-<li>全局安装</li>
-</ol>
-<p>直接再命令行中输入<code>plop</code>即可</p>
-<p><img src="/2021/01/28/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7plop%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/plop%E8%BF%90%E8%A1%8C2.png" alt="直接使用plop"></p>
-<p>后续操作相同</p>
-<p>最后附上我的plop-demo：地址是：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NvZGVyd3V5Zi9wbG9wLWRlbW8=">https://github.com/coderwuyf/plop-demo<i class="fa fa-external-link-alt"></i></span></p>
-
+<p>目的是为了减少开发中的创建组件或页面时，重复代码的书写。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/28/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7plop%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
